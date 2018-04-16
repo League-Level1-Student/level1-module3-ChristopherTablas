@@ -25,6 +25,7 @@ public class BookOfIllusions extends MouseAdapter {
 	public static void main(String[] args) throws Exception {
 		BookOfIllusions illusions = new BookOfIllusions();
 		illusions.createBook();
+		
 	}
 
 	// 1. Make a JFrame variable and initialize it using "new JFrame()"
@@ -55,6 +56,7 @@ public class BookOfIllusions extends MouseAdapter {
 	public void mousePressed(MouseEvent e) {
 		frame.removeAll();
 		JFrame frame = new JFrame();
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 		frame.setSize(300,300);
 		JLabel lab;
@@ -62,7 +64,7 @@ public class BookOfIllusions extends MouseAdapter {
 		// 11. Print "clicked!" to the console when the mouse is pressed
 		System.out.println("Clicked!");
 		// 12. remove everything from the frame that was added earlier
-		
+	
 		lab = loadImageFromComputer(donkey);
 		// 13. load a new image like before (this is more than one line of code)
 		frame.add(lab);
