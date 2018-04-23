@@ -58,11 +58,11 @@ showImage();
 	}
 	private void showImage() {
     	//5. initialize your frame to a new JFrame()
+		frame = new JFrame();
     	//6. set the frame to visible
 		frame.setVisible(true);
   	 //frame.add(getNextRandomImage()); //7. rename to the name of your frame
 		frame.add(getNextRandomImage());
-		
     	// 8. set the size of the frame 
      	frame.setSize(400, 400);
     	// 9. add a key listener to the frame
@@ -70,7 +70,10 @@ showImage();
    	 //10. Use the speak method to either say "Simon says press this key" or "Press this key"
      	speak("Simon says press this key");
     	//Hint: use the simonSays int and a random number
+     	Random ram = new Random(1-4);
+     	System.out.println(ram);
 	}
+
 	private Component getNextRandomImage() {
     	this.imageIndex = new Random().nextInt(4) + 37;
     	return loadImage(images.get(imageIndex));
