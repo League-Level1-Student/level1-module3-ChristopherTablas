@@ -50,8 +50,7 @@ public class Jeopardy implements ActionListener {
 		// 2. Give your frame a title
 		frame.setTitle("Jeopardy");
 		// 3. Create a JPanel variable to hold the header using the createHeader method
-		quizPanel.
-		//createHeader("y");
+		
 		// 4. Add the header component to the quizPanel
 		
 		// 5. Add the quizPanel to the frame
@@ -60,7 +59,7 @@ public class Jeopardy implements ActionListener {
 		// 6. Use the createButton method to set the value of firstButton 
 		//createButton(0)
 	// 7. Add the firstButton to the quizPanel
-		
+		quizPanel.add(firstButton);
 		// 8. Write the code inside the createButton() method below. Check that your game looks like Figure 1 in the Jeopardy Handout - http://bit.ly/1bvnvd4.
 		
 		// 9. Use the secondButton variable to hold a button using the createButton method
@@ -94,7 +93,7 @@ public class Jeopardy implements ActionListener {
 		// Set the text of the button to the dollarAmount
 		but.setText("dollarAmount");
 		// Increment the buttonCount (this should make the layout vertical)
-		
+		but.getVerticalAlignment();
 		// Return your new button instead of the temporary button
 		
 		return new JButton(dollarAmount);
