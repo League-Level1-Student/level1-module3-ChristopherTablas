@@ -1,7 +1,5 @@
- // Copyright Wintriss Technical Schools 2013
 import java.applet.AudioClip;
 import java.awt.BorderLayout;
-import java.awt.Button;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridLayout;
@@ -10,9 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
+
 import javax.swing.BoxLayout;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -23,146 +19,174 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import java.io.File;
 
-/* This recipe is to be used with the Jeopardy Handout: http://bit.ly/1bvnvd4 */
+
+/* Check out the Jeopardy Handout to see what the end result should look like: http://bit.ly/1bvnvd4 */
 
 public class Jeopardy implements ActionListener {
 	private JButton firstButton;
 	private JButton secondButton;
 	private JButton thirdButton, fourthButton;
-	
+	private JButton fifthButton;
 	private JPanel quizPanel;
-	int score = 0;
-	JLabel scoreBox = new JLabel("0");
-	int buttonCount = 0;
+	private int score = 0;
+	private JLabel scoreBox = new JLabel("0");
+	private int buttonCount = 0;
+	private AudioClip sound;
+
 	public static void main(String[] args) {
 		new Jeopardy().start();
 	}
-		private void start() {
+
+	private void start() {
 		JFrame frame = new JFrame();
-		quizPanel  = new JPanel();
-		frame.setLayout(new BorderLayout());
-		
-		// 1. Make the frame show up
-		frame.setVisible(true);
-		
-		// 2. Give your frame a title
-		frame.setTitle("Jeopardy");
-		// 3. Create a JPanel variable to hold the header using the createHeader method
-		
-		// 4. Add the header component to the quizPanel
-		
-		// 5. Add the quizPanel to the frame
-		frame.add(quizPanel);
-		
-		// 6. Use the createButton method to set the value of firstButton 
-		//createButton(0)
-	// 7. Add the firstButton to the quizPanel
-		quizPanel.add(firstButton);
-		// 8. Write the code inside the createButton() method below. Check that your game looks like Figure 1 in the Jeopardy Handout - http://bit.ly/1bvnvd4.
-		
-		// 9. Use the secondButton variable to hold a button using the createButton method
-
-		// 10. Add the secondButton to the quizPanel
-		
-		// 11. Add action listeners to the buttons (2 lines of code)
-	
-		
-		// 12. Fill in the actionPerformed() method below
-				
-		frame.pack();
-		quizPanel.setLayout(new GridLayout(buttonCount+1, 3));
-		frame.add(makeScorePanel(), BorderLayout.NORTH);
-		frame.setSize(Toolkit.getDefaultToolkit().getScreenSize().height, Toolkit.getDefaultToolkit().getScreenSize().width);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		quizPanel = new JPanel();
+		frame.setLayout(new BorderLayout());
+		// 1. Make the frame show up
+frame.setVisible(true);
+		// 2. Give your frame a title
+frame.setTitle("Jeopardy");
+		// 3. Create a JPanel variable to hold the header using the createHeader method
+JPanel panel = new JPanel();
+		// 4. Add the header component to the quizPanel
+quizPanel.add(panel);
+		// 5. Add the quizPanel to the frame
+frame.add(quizPanel);
+		// 6. Use the createButton method to set the value of firstButton
+		firstButton = createButton("1000");
+		// 7. Add the firstButton to the quizPanel
+quizPanel.add(firstButton);
+		// 8. Write the code to complete the createButton() method below. Check that your
+		// game looks like Figure 1 in the Jeopardy Handout - http://bit.ly/1bvnvd4.
 
+		// 9. Use the secondButton variable to hold a button using the createButton
+		// method
+secondButton = createButton("800");
+		// 10. Add the secondButton to the quizPanel
+quizPanel.add(secondButton);
+		// 11. Add action listeners to the buttons (2 lines of code)
+secondButton.addActionListener(this);
+firstButton.addActionListener(this);
+		// 12. Write the code to complete the actionPerformed() method below
+		
+		// 13. Add buttons so that you have $200, $400, $600, $800 and $1000 questions
+		 thirdButton = createButton("600");
+		quizPanel.add(thirdButton);
+		 fourthButton = createButton("400");
+		quizPanel.add(fourthButton);
+		 fifthButton = createButton("200");
+		quizPanel.add(fifthButton);
+		thirdButton.addActionListener(this);
+		fourthButton.addActionListener(this);
+		fifthButton.addActionListener(this);
+		 /*
+		 * [optional] Use the showImage or playSound methods when the user answers a
+		 * question
+		 */		
+		
+		frame.pack();
+	
+		quizPanel.setLayout(new GridLayout(buttonCount + 1, 3));
+		frame.add(makeScorePanel(), BorderLayout.NORTH);
+		frame.setSize(Toolkit.getDefaultToolkit().getScreenSize().height,
+				Toolkit.getDefaultToolkit().getScreenSize().width);
 	}
 
-	/*
-	 * 13. Use the method provided to play the Jeopardy theme music 
-	 * 
-	 * 14. Add buttons so that you have $200, $400, $600, $800 and $1000 questions
-	 *
-	 * [optional] Use the showImage or playSound methods when the user answers a question 
-	 */
-	
+
 	private JButton createButton(String dollarAmount) {
-		// Create a new JButton
-	JButton but = new JButton();
-		// Set the text of the button to the dollarAmount
-		but.setText("dollarAmount");
-		// Increment the buttonCount (this should make the layout vertical)
-		but.getVerticalAlignment();
-		// Return your new button instead of the temporary button
 		
-		return new JButton(dollarAmount);
+		// Create a new JButton
+JButton button = new JButton();
+		// Set the text of the button to the dollarAmount
+button.setText(dollarAmount);
+		// Increment the buttonCount (this should make the layout vertical)
+	buttonCount++;
+		// Return your new button instead of the temporary button
+
+		return button;
 	}
 
-	public void actionPerformed(ActionEvent arg0) {
-		// Remove this temporary message:
+	public void actionPerformed(ActionEvent e) {
+		
+		// Remove this temporary message after testing:
+		
 
-
-		// Use the method that plays the jeopardy theme music.
-
-		JButton buttonPressed = (JButton) arg0.getSource();
+		JButton buttonPressed = (JButton) e.getSource();
 		// If the buttonPressed was the firstButton
-
+		if(buttonPressed == firstButton){
+			System.out.println("test");
+			askQuestion("who was the 44th president?", "Barack Obama", 1000);
+			firstButton.setText("");
+		}
 			// Call the askQuestion() method
-		
-			// Fill in the askQuestion() method. When you play the game, the score should change.
-		
-		// Or if the buttonPressed was the secondButton
-askQuestion("who was the 33rd president of the United States of America?", "Harry S. Truman", 9999);
+ 
+		// Complete the code in the askQuestion() method. When you play the game, the score should change.
 
-			// Call the askQuestion() method with a harder question
-			askQuestion("who was the 21st president?", null, 9999);
-		
-		// Clear the button text (set the button text to nothing)
-	
+		// If the buttonPressed was the secondButton
+		if(secondButton == buttonPressed){
+			askQuestion("who was the 33rd president?", "Harry S. Truman", 800);
+			secondButton.setText("");
+		}
+		if(thirdButton == buttonPressed){
+			askQuestion("who was the 22nd president?", "Grover Cleverland", 600);
+			thirdButton.setText("");
+		}
+		if(fourthButton == buttonPressed){
+			askQuestion("who was the 11th president?", "James K. Polk", 400);
+			fourthButton.setText("");
+		}
+		if(fifthButton == buttonPressed){
+			askQuestion("who was the 1st president?", "George Washington", 200);
+			fifthButton.setText("");
+		}
 			
+		
+			// Call the askQuestion() method with a harder question
+		
+		// Clear the text on the button that was pressed (set the button text to nothing)
+
+	}
 
 	private void askQuestion(String question, String correctAnswer, int prizeMoney) {
-		// Use a pop up to ask the user the question
-		String ans = JOptionPane.showInputDialog("What is 18 * 37?");
-		System.out.println(ans);
-		Integer.parseInt(ans);
+		
+		// Use the playJeopardyTheme() method to play music while the use thinks of an answer
+		
+		// Remove this temporary message and replace it with a pop-up that asks the user the question
+		String taco = JOptionPane.showInputDialog(question);
+		
+		// Stop the theme music when they have entered their response. Hint: use the sound variable 
+		
 		// If the answer is correct
-		//if (ans = 666 ){
-			
-	//	}
+		
 			// Increase the score by the prizeMoney
-			
-			// Call the updateScore() method
-			updateScore();
+		if(taco.equals(correctAnswer)){
+ score = score + prizeMoney;
 			// Pop up a message to tell the user they were correct
-			JOptionPane.showMessageDialog(null, "Correct!");
-			// Otherwise
-		
+JOptionPane.showMessageDialog(null, "You were Correct!");}
+		else{
+			score = score - prizeMoney;
+			JOptionPane.showMessageDialog(null, "You were wrong! The correct answer was " + correctAnswer);
+		}
+		updateScore();
+		// Otherwise
+
 			// Decrement the score by the prizeMoney
-			
-			// Pop up a message to tell the user the correct answer
-			JOptionPane.showMessageDialog(null, "Incorrect! not very cash money of you! The correct answer was 666");
-			// Call the updateScore() method
-			updateScore();
-		
+
+			// Pop up a message to tell the user they were wrong and give them the correct answer
+
+		// Call the updateScore() method
+
 	}
 
-
-public void playJeopardyTheme() {
+	public void playJeopardyTheme() {
 		try {
-			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("/Users/League/Google Drive/league-sounds/jeopardy.wav"));
-			Clip clip = AudioSystem.getClip();
-			clip.open(audioInputStream);
-			clip.start();
+			sound = JApplet.newAudioClip(getClass().getResource("jeopardy.wav"));
+			sound.play();
+			Thread.sleep(3400);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-	}
-
-	private void playSound(String fileName) {
-		AudioClip scream = JApplet.newAudioClip(getClass().getResource(fileName));
-		scream.play();
 	}
 
 	private Component makeScorePanel() {
@@ -204,5 +228,3 @@ public void playJeopardyTheme() {
 		frame.pack();
 	}
 }
-
-
